@@ -2,23 +2,50 @@ const colorBtn = document.getElementById("colorBtn");
 const hexColor = document.querySelector(".hexColor");
 const rgbColor = document.querySelector(".rgbColor");
 
-const hexValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
+function hexValues(x) {
+  let y;
+  switch (x) {
+    case 10:
+      y = "A";
+      break;
+    case 11:
+      y = "B";
+      break;
+    case 12:
+      y = "C";
+      break;
+    case 13:
+      y = "D";
+      break;
+    case 14:
+      y = "E";
+      break;
+    case 15:
+      y = "F";
+      break;
+    default:
+      y = x;
+  }
+  return y;
+}
 
 colorBtn.addEventListener("click", () => {
-  let hexCodes = "#";
-  for (let i = 0; i < 6; i++) {
-    hexCodes += hexValues[getHexValues()];
-  }
-  hexColor.innerHTML = hexCodes;
-  document.body.style.backgroundColor = hexCodes;
+  let red = Math.floor(Math.random() * 256);
+  let green = Math.floor(Math.random() * 256);
+  let blue = Math.floor(Math.random() * 256);
+  let rgbValues = `${red}, ${green}, ${blue}`;
 
-  rgbColor.innerHTML = `rgb(${getRGBvalues()}, ${getRGBvalues()}, ${getRGBvalues()})`;
+  document.body.style.backgroundColor = rgbValues;
+  rgbColor.innerHTML = ` rgb(${rgbValues})`;
+
+  function getHexValues(color) {
+    let hexCode1 = hexValues(Math.trunc(color / 16));
+    let hexCode2 = hexValues(color % 16);
+    return String(hexCode1) + String(hexCode2);
+  }
+
+  hexColor.innerHTML = `#${getHexValues(red)}${getHexValues(
+    green
+  )}${getHexValues(blue)}`;
 });
 
-function getHexValues() {
-  return Math.floor(Math.random() * hexValues.length);
-}
-
-function getRGBvalues() {
-  return Math.floor(Math.random() * 255);
-}
