@@ -5,7 +5,7 @@ const rgbColor = document.querySelector(".rgbColor");
 colorBtn.addEventListener("click", () => {
   // Deriving the Hexcode
   function getRandomValues() {
-    const hexValues = "01234567890ABCDEF";
+    let hexValues = "01234567890ABCDEF";
     let hexCodes = "#";
 
     for (let i = 0; i < 6; i++) {
@@ -17,9 +17,9 @@ colorBtn.addEventListener("click", () => {
   }
   getRandomValues();
 
+  let hexCode1 = hexValues[Math.trunc(color / 16)];
+  let hexCode2 = hexValues[color % 16];
   function getHexValues(color) {
-    let hexCode1 = hexValues(Math.trunc(color / 16));
-    let hexCode2 = hexValues(color % 16);
     return String(hexCode1) + String(hexCode2);
   }
 
